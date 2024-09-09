@@ -6,7 +6,7 @@ import {useEffect, useState} from "react";
 let timeformatted;
 let isHost = true;
 
-const socket = io.connect("http://185.211.61.164:3001");
+const socket = io.connect("https://server.deltanoise.net");
 
 const requestServerTime = () => {
   socket.emit("request_server_time");
