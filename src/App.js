@@ -6,6 +6,15 @@ import {useEffect, useState} from "react";
 let timeformatted;
 let isHost = true;
 
+const green =  "rgb(0,255,0)";
+const yellow =  "rgb(255,255,0)";
+const red =  "rgb(255,0,0)";
+
+
+let color =  green;
+
+
+
 const socket = io.connect("https://server.deltanoise.net");
 
 const requestServerTime = () => {
@@ -54,6 +63,16 @@ function App() {
 
         setTime(data);
         timeformatted = secondsToHMS(data);
+
+        if(data > 10*60) {
+          color = green;
+        }
+        else if(data < 10*60 && data > 5*60) {
+          color = yellow;
+        }
+        else if(data < 5*60) {
+          color = red;
+        }
         //console.log(data);
 
       })
@@ -62,7 +81,7 @@ function App() {
   //HTML Frontend
   return (
 
-    <div className="App">
+    <div className="App" style={{backgroundColor: color}}>
 
       {isHost &&
       <div>
