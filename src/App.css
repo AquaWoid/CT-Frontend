@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  height: 400px;
+
 }
 
 .App-logo {
@@ -41,3 +43,4 @@ h1 {
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size:xx-large;
 }
+

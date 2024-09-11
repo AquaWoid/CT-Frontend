@@ -6,14 +6,14 @@ import {useEffect, useState} from "react";
 let timeformatted;
 let isHost = true;
 
-const green =  "rgb(0,255,0)";
-const yellow =  "rgb(255,255,0)";
-const red =  "rgb(255,0,0)";
+const green =  "rgb(145, 235, 56)";
+const yellow =  "rgb(255, 249, 79)";
+const red =  "rgb(247, 69, 69)";
 
 
 let color =  green;
 
-
+document.body.style.backgroundColor = color;
 
 const socket = io.connect("https://server.deltanoise.net");
 
@@ -74,7 +74,7 @@ function App() {
           color = red;
         }
         //console.log(data);
-
+        document.body.style.backgroundColor = color;
       })
     }, [socket])
 
