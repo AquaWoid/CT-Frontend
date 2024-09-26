@@ -29,11 +29,15 @@ const setServerTime = (value) => {
 }
 
 const setYellowLimitServer = (limit) => {
-  socket.emit("set_yellow_limit", limit)
+  socket.emit("set_yellow_limit", limit);
 }
 
 const setRedLimitServer = (limit) => {
-  socket.emit("set_red_limit", limit)
+  socket.emit("set_red_limit", limit);
+}
+
+const requestLimits = () => {
+  socket.emit("request_limits");
 }
 
 const toggleActive = (condition) => {
@@ -53,6 +57,8 @@ const toggleHost = (condition) => {
 
 
 function App() {
+
+  requestLimits();
 
   // Time Formatting
   const secondsToHMS = (secs) => {
