@@ -92,10 +92,12 @@ function App() {
 
       socket.on("receive_yellow_limit", (limit) => {
         yellowLimit = limit;
+        console.log("Received new Yellow Limit with value" + limit + "new value= " + yellowLimit);
       })
   
       socket.on("receive_red_limit", (limit) => {
         redLimit = limit;
+        console.log("Received new red Limit with value" + limit + "new value= " + redLimit);
       })
 
     }, [socket])
