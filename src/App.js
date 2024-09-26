@@ -56,6 +56,8 @@ function App() {
 
   // Time Set UseState
   const[time, setTime] = useState(600);
+  const[redTreshold, setRedTreshold] = useState(1);
+  const[yellowTreshold, setYellowTreshold] = useState (5);
 
     // Server Time Live Update
     useEffect(() => {
@@ -64,13 +66,13 @@ function App() {
         setTime(data);
         timeformatted = secondsToHMS(data);
 
-        if(data > 10*60) {
+        if(data > yellowTreshold*60) {
           color = green;
         }
-        else if(data < 10*60 && data > 5*60) {
+        else if(data < yellowTreshold*60 && data > redTreshold*60) {
           color = yellow;
         }
-        else if(data < 5*60) {
+        else if(data < redTreshold*60) {
           color = red;
         }
         //console.log(data);
@@ -89,11 +91,14 @@ function App() {
       </div>
       }   
 
-
       <h1>{timeformatted}</h1>
 
       {isHost && 
       <div id='buttonsTime'>
+      <div>Yellow <input className='inp'  defaultValue={5} type='text' onChange={i => setYellowTreshold(i.target.value)}></input></div>
+      <div>Red <input className='inp' defaultValue={1} type="text" onChange={i => setRedTreshold(i.target.value)}></input></div>
+
+
       <button onClick={() => setServerTime(5)}>+5</button>
       <button onClick={() => setServerTime(10)}>+10</button>
       <button onClick={() => setServerTime(-5)}>-5</button>
