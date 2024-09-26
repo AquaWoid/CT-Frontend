@@ -65,7 +65,19 @@ function App() {
     return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
 
   } 
-  
+
+
+  useEffect(() => {
+    socket.on("receive_yellow_limit", (limit) => {
+      yellowLimit = limit;
+    })
+
+    socket.on("receive_red_limit", (limit) => {
+      redLimit = limit;
+    })
+
+  }, [socket])
+
   // Time Set UseState
   const[time, setTime] = useState(600);
 
@@ -88,16 +100,6 @@ function App() {
         //console.log(data);
         document.body.style.backgroundColor = color;
       })
-
-      socket.on("receive_yellow_limit", (limit) => {
-        yellowLimit = limit;
-      })
-  
-      socket.on("receive_red_limit", (limit) => {
-        redLimit = limit;
-      })
-
-
     }, [socket])
 
   //HTML Frontend
