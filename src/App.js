@@ -68,6 +68,7 @@ function App() {
 
 
   useEffect(() => {
+    
     socket.on("receive_yellow_limit", (limit) => {
       yellowLimit = limit;
     })
@@ -76,7 +77,7 @@ function App() {
       redLimit = limit;
     })
 
-  }, [socket])
+  })
 
   // Time Set UseState
   const[time, setTime] = useState(600);
