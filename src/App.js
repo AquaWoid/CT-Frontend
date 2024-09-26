@@ -13,6 +13,9 @@ const red =  "rgb(247, 69, 69)";
 
 let color =  green;
 
+let redLimit = 5;
+let yellowLimit = 1;
+
 document.body.style.backgroundColor = color;
 
 const socket = io.connect("https://server.deltanoise.net");
@@ -40,6 +43,15 @@ const toggleHost = (condition) => {
   isHost = condition;
 }
 
+
+function setYellowLimit(val) {
+  yellowLimit += val
+}
+function setRedLimit(val) {
+  redLimit += val
+}
+
+
 function App() {
 
   // Time Formatting
@@ -56,8 +68,6 @@ function App() {
 
   // Time Set UseState
   const[time, setTime] = useState(600);
-  const[redTreshold, setRedTreshold] = useState(1);
-  const[yellowTreshold, setYellowTreshold] = useState (5);
 
     // Server Time Live Update
     useEffect(() => {
@@ -66,19 +76,17 @@ function App() {
         setTime(data);
         timeformatted = secondsToHMS(data);
 
-        if(data > yellowTreshold*60) {
+        if(data > yellowLimit*60) {
           color = green;
         }
-        else if(data < yellowTreshold*60 && data > redTreshold*60) {
+        else if(data < yellowLimit*60 && data > redLimit*60) {
           color = yellow;
         }
-        else if(data < redTreshold*60) {
+        else if(data < redLimit*60) {
           color = red;
         }
         //console.log(data);
         document.body.style.backgroundColor = color;
-        console.log("yellow Threshold" + yellowTreshold)
-        console.log("Red Threshold " + redTreshold)
       })
     }, [socket])
 
@@ -97,8 +105,14 @@ function App() {
 
       {isHost && 
       <div id='buttonsTime'>
-      <div>Yellow <input className='inp'  defaultValue={5} type='text' onChange={e => setYellowTreshold(e.target.value)}></input></div>
-      <div>Red <input className='inp' defaultValue={1} type="text" onChange={e => setRedTreshold(e.target.value)}></input></div>
+      <div>
+      <button onClick={() => setYellowLimit(-1)}>-</button> {yellowLimit} <button onClick={() => setYellowLimit(+1)}>+</button>
+      </div>
+      <div>
+      <button onClick={() => setRedLimit(-1)}>-</button> {redLimit} <button onClick={() => setRedLimit(+1)}>+</button>
+      </div>
+
+
 
       <button onClick={() => setServerTime(5)}>+5</button>
       <button onClick={() => setServerTime(10)}>+10</button>
@@ -112,7 +126,7 @@ function App() {
       <button onClick={() => toggleActive(true)}>Start</button>
       <button onClick={() => toggleActive(false)}>Stop</button>
       <button onClick={() => sendResetTimer()}>Reset</button>
-      <p>Hooked Server Time (Seconds): {time}</p>
+      <p className='testClass'>Hooked Server Time (Seconds): {time}</p>
       </div>
       }
 
