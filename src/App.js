@@ -77,6 +77,8 @@ function App() {
         }
         //console.log(data);
         document.body.style.backgroundColor = color;
+        console.log("yellow Threshold" + yellowTreshold)
+        console.log("Red Threshold " + redTreshold)
       })
     }, [socket])
 
@@ -95,9 +97,8 @@ function App() {
 
       {isHost && 
       <div id='buttonsTime'>
-      <div>Yellow <input className='inp'  defaultValue={5} type='text' onChange={i => setYellowTreshold(i.target.value)}></input></div>
-      <div>Red <input className='inp' defaultValue={1} type="text" onChange={i => setRedTreshold(i.target.value)}></input></div>
-
+      <div>Yellow <input className='inp'  defaultValue={5} type='text' onChange={e => setYellowTreshold(e.target.value)}></input></div>
+      <div>Red <input className='inp' defaultValue={1} type="text" onChange={e => setRedTreshold(e.target.value)}></input></div>
 
       <button onClick={() => setServerTime(5)}>+5</button>
       <button onClick={() => setServerTime(10)}>+10</button>
