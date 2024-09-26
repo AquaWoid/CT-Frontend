@@ -13,8 +13,8 @@ const red =  "rgb(247, 69, 69)";
 
 let color =  green;
 
-let redLimit = 5;
-let yellowLimit = 1;
+let redLimit = 1;
+let yellowLimit = 5;
 
 document.body.style.backgroundColor = color;
 
@@ -26,6 +26,14 @@ const requestServerTime = () => {
 
 const setServerTime = (value) => {
   socket.emit("set_server_time", value*60)
+}
+
+const setYellowLimitServer = (limit) => {
+  socket.emit("set_yellow_limit", limit)
+}
+
+const setRedLimitServer = (limit) => {
+  socket.emit("set_red_limit", limit)
 }
 
 const toggleActive = (condition) => {
@@ -44,14 +52,6 @@ const toggleHost = (condition) => {
 }
 
 
-function setYellowLimit(val) {
-  yellowLimit += val
-}
-function setRedLimit(val) {
-  redLimit += val
-}
-
-
 function App() {
 
   // Time Formatting
@@ -65,6 +65,18 @@ function App() {
     return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
 
   } 
+
+
+  useEffect(() => {
+    socket.on("receive_yellow_limit", (limit) => {
+      yellowLimit = limit;
+    })
+
+    socket.on("receive_red_limit", (limit) => {
+      redLimit = limit;
+    })
+
+  })
 
   // Time Set UseState
   const[time, setTime] = useState(600);
@@ -106,10 +118,10 @@ function App() {
       {isHost && 
       <div id='buttonsTime'>
       <div>
-      <button onClick={() => setYellowLimit(-1)}>-</button> {yellowLimit} <button onClick={() => setYellowLimit(+1)}>+</button>
+      <button onClick={() => setYellowLimitServer(-1)}>-</button> {yellowLimit} <button onClick={() => setYellowLimitServer(+1)}>+</button>
       </div>
       <div>
-      <button onClick={() => setRedLimit(-1)}>-</button> {redLimit} <button onClick={() => setRedLimit(+1)}>+</button>
+      <button onClick={() => setRedLimitServer(-1)}>-</button> {redLimit} <button onClick={() => setRedLimitServer(+1)}>+</button>
       </div>
 
 
