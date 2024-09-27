@@ -84,6 +84,7 @@ function App() {
 
   const[redLimitState, setRedLimit] = useState(1);
   const[yellowLimitState, setYellowLimit] = useState(1);
+  const[col, setColor] = useState("rgb(145, 235, 56)")
 
 
     /* TODO : Limits and BG (APP Class) only update when time is running
@@ -101,15 +102,18 @@ function App() {
 
         if(data > yellowLimit*60) {
           color = green;
+          setColor("rgb(145, 235, 56)")
         }
         else if(data < yellowLimit*60 && data > redLimit*60) {
           color = yellow;
+          setColor("rgb(255, 249, 79)")
         }
         else if(data < redLimit*60) {
           color = red;
+          setColor("rgb(247, 69, 69)")
         }
         //console.log(data);
-        document.body.style.backgroundColor = color;
+        document.body.style.backgroundColor = col;
       })
 
       socket.on("receive_yellow_limit", (limit) => {
@@ -129,7 +133,7 @@ function App() {
   //HTML Frontend
   return (
 
-    <div className="App" style={{backgroundColor: color}}>
+    <div className="App" style={{backgroundColor: col}}>
 
       {isHost &&
       <div>
