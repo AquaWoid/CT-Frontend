@@ -56,6 +56,12 @@ const toggleHost = (condition) => {
 }
 
 
+function updateLimitsUI(y,r) {
+  yellowLimit = y;
+  redLimit = r;
+}
+
+
 function App() {
 
   requestLimits();
@@ -75,6 +81,16 @@ function App() {
 
   // Time Set UseState
   const[time, setTime] = useState(600);
+
+  const[redLimitState, setRedLimit] = useState(1);
+  const[yellowLimitState, setYellowLimit] = useState(1);
+
+
+    /* TODO : Limits and BG (APP Class) only update when time is running
+       Receive-Limit-Sockets are called normally 
+       To Reproduce - Stop Timer, set limit so that the color changes 
+       See how the UI of the Limit Values and the bG of APP Class div color doesnt update while the socket transmission happens correctly (check console)
+    */
 
     // Server Time Live Update
     useEffect(() => {
@@ -98,11 +114,13 @@ function App() {
 
       socket.on("receive_yellow_limit", (limit) => {
         yellowLimit = limit;
+        setYellowLimit(limit);
         console.log("Received new Yellow Limit with value" + limit + "new value= " + yellowLimit);
       })
   
       socket.on("receive_red_limit", (limit) => {
         redLimit = limit;
+        setRedLimit(limit);
         console.log("Received new red Limit with value" + limit + "new value= " + redLimit);
       })
 
@@ -124,10 +142,10 @@ function App() {
       {isHost && 
       <div id='buttonsTime'>
       <div>
-      <button onClick={() => setYellowLimitServer(-1)}>-</button> {yellowLimit} <button onClick={() => setYellowLimitServer(+1)}>+</button>
+      <button onClick={() => setYellowLimitServer(-1)}>-</button> {yellowLimitState} <button onClick={() => setYellowLimitServer(+1)}>+</button>
       </div>
       <div>
-      <button onClick={() => setRedLimitServer(-1)}>-</button> {redLimit} <button onClick={() => setRedLimitServer(+1)}>+</button>
+      <button onClick={() => setRedLimitServer(-1)}>-</button> {redLimitState} <button onClick={() => setRedLimitServer(+1)}>+</button>
       </div>
 
 
