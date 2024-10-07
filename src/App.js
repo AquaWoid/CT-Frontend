@@ -113,7 +113,7 @@ function App() {
           setColor("rgb(247, 69, 69)")
         }
         //console.log(data);
-        document.body.style.backgroundColor = col;
+        document.body.style.backgroundColor = color;
       })
 
       socket.on("receive_yellow_limit", (limit) => {
