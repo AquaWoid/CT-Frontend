@@ -113,7 +113,7 @@ function App() {
           setColor("rgb(247, 69, 69)")
         }
         //console.log(data);
-        document.body.style.backgroundColor = color;
+        document.body.style.backgroundColor = col;
       })
 
       socket.on("receive_yellow_limit", (limit) => {
@@ -134,7 +134,7 @@ function App() {
   return (
 
     <div className="App" style={{backgroundColor: col}}>
-
+      <div className='formater'>
       {isHost &&
       <div>
       <button onClick={() => toggleHost(false)}>Client View</button>
@@ -169,6 +169,8 @@ function App() {
       <p className='testClass'>Hooked Server Time (Seconds): {time}</p>
       </div>
       }
+
+      </div>      
 
 
     </div>
