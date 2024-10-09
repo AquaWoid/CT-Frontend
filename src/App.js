@@ -146,10 +146,13 @@ function App() {
       {isHost && 
       <div id='buttonsTime'>
       <div>
+      <p>Yellow Limit</p>
       <button onClick={() => setYellowLimitServer(-1)}>-</button> {yellowLimitState} <button onClick={() => setYellowLimitServer(+1)}>+</button>
       </div>
       <div>
+      <p>Red Limit</p>
       <button onClick={() => setRedLimitServer(-1)}>-</button> {redLimitState} <button onClick={() => setRedLimitServer(+1)}>+</button>
+      <p></p>      
       </div>
 
 
