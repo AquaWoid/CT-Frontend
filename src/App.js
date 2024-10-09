@@ -84,8 +84,8 @@ function App() {
 
   const[redLimitState, setRedLimit] = useState(1);
   const[yellowLimitState, setYellowLimit] = useState(1);
-  const[col, setColor] = useState("rgb(145, 235, 56)")
-
+  const[col, setColor] = useState("rgb(145, 235, 56)");
+  const[host, setHost] = useState(true);
 
     /* TODO : Limits and BG (APP Class) only update when time is running
        Receive-Limit-Sockets are called normally 
@@ -135,15 +135,15 @@ function App() {
 
     <div className="App" style={{backgroundColor: col}}>
       <div className='formater'>
-      {isHost &&
+      {host &&
       <div>
-      <button onClick={() => toggleHost(false)}>Client View</button>
+      <button onClick={() => setHost(false)}>Client View</button>
       </div>
       }   
 
       <h1>{timeformatted}</h1>
 
-      {isHost && 
+      {host && 
       <div id='buttonsTime'>
       <div>
       <p>Yellow Limit</p>
@@ -164,7 +164,7 @@ function App() {
       </div>
       }
 
-      {isHost && 
+      {host && 
       <div id="buttonsSSR">
       <button onClick={() => toggleActive(true)}>Start</button>
       <button onClick={() => toggleActive(false)}>Stop</button>
