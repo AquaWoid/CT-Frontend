@@ -104,11 +104,11 @@ function App() {
           color = green;
           setColor("rgb(145, 235, 56)")
         }
-        else if(data < yellowLimit*60 && data > redLimit*60) {
+        else if(data <= yellowLimit*60 && data > redLimit*60) {
           color = yellow;
           setColor("rgb(255, 249, 79)")
         }
-        else if(data < redLimit*60) {
+        else if(data <= redLimit*60) {
           color = red;
           setColor("rgb(247, 69, 69)")
         }
